@@ -1,0 +1,237 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true
+      }
+    ],
+    "arrow-spacing": "warn",
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "no-bitwise": 1,
+    "no-else-return": 2,
+    "no-empty": [
+      "warn",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-eq-null": 2,
+    "no-extra-parens": 0,
+    "no-floating-decimal": 2,
+    "no-inner-declarations": [
+      2,
+      "both"
+    ],
+    "no-lonely-if": 2,
+    "no-multiple-empty-lines": [
+      2,
+      {
+        "max": 3
+      }
+    ],
+    "no-multi-spaces": "warn",
+    "no-self-compare": 2,
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": 1,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-void": 0,
+    "brace-style": [
+      1,
+      "1tbs"
+    ],
+    "camelcase": [
+      1,
+      {
+        "properties": "never"
+      }
+    ],
+    "consistent-return": 0,
+    "comma-spacing": [
+      "warn",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "comma-style": [
+      1,
+      "last"
+    ],
+    // "complexity": [
+    //     1,
+    //     20
+    // ],
+    "func-names": 0,
+    "guard-for-in": 2,
+    "indent": "off",
+    "@typescript-eslint/indent": "off",
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
+    ],
+    "key-spacing": [
+      "warn",
+      {
+        "afterColon": true,
+        "beforeColon": false
+      }
+    ],
+    "max-len": [
+      0,
+      120,
+      4
+    ],
+    "new-cap": [
+      1,
+      {
+        "newIsCap": true,
+        "capIsNew": false
+      }
+    ],
+    "quotes": [
+      1,
+      "single",
+      "avoid-escape"
+    ],
+    "keyword-spacing": [
+      1,
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "space-before-blocks": [
+      1,
+      "always"
+    ],
+    "array-bracket-spacing": [
+      1,
+      "never"
+    ],
+    "space-infix-ops": "warn",
+    "space-in-parens": [
+      1,
+      "never"
+    ],
+    "strict": [
+      0
+    ],
+    "valid-jsdoc": 1,
+    "wrap-iife": [
+      1,
+      "any"
+    ],
+    "yoda": [
+      1,
+      "never"
+    ],
+    "semi": "warn",
+    "no-use-before-define": 0,
+    "import/namespace": [
+      2,
+      {
+        "allowComputed": true
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "index",
+          "sibling",
+          "parent",
+          "internal",
+          "external",
+          "builtin",
+          "object"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "never"
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      1,
+      {
+        "functions": false
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "etc/no-commented-out-code": "warn",
+    "react/react-in-jsx-scope": 0,
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "@typescript-eslint/no-non-null-assertion": 1,
+    "@typescript-eslint/no-explicit-any": 1
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint/eslint-plugin",
+    "eslint-plugin-import",
+    "eslint-plugin-jsx-a11y",
+    "prettier",
+    "eslint-plugin-react",
+    "unused-imports",
+    "eslint-plugin-etc"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.js",
+        "*.jsx",
+        "*.ts",
+        "*.tsx"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
+  "globals": {}
+}
