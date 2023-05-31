@@ -52,6 +52,9 @@ jobs:
            
       - name: Snyk Auth
         run: snyk auth ${{secrets.SNYK_AUTH_TOKEN}}
+           
+      - name: Get dependencies
+        run: pnpm install
 
      
 
