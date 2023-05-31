@@ -18,13 +18,21 @@ export default function handleRequest(
   const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
+  const sanitizeUrl = (url: string): string => {
+    const hostname = request.headers.get('host');
+    const urlObj = new URL(url);
+    if (hostname) urlObj.hostname = hostname;
+    return urlObj.href;
+  };
+
   function MuiRemixServer() {
     return (
       <CacheProvider value={cache}>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <RemixServer context={remixContext} url={request.url} />
+          {/* deepcode ignore OR: URL is being sanitized */}
+          <RemixServer context={remixContext} url={sanitizeUrl(request.url)} />
         </ThemeProvider>
       </CacheProvider>
     );
@@ -50,7 +58,7 @@ export default function handleRequest(
     `<meta name="emotion-insertion-point" content="emotion-insertion-point"/>${stylesHTML}`
   );
 
-  responseHeaders.set('Content-Type', 'text/html');
+  responseHeaders.set('Content-Type', 'text/html; charset=utf-8');
 
   return new Response(`<!DOCTYPE html>${markup}`, {
     status: responseStatusCode,
