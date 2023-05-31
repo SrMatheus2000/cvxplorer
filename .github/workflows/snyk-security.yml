@@ -48,7 +48,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
 
       - name: Printa variaveis
-        run: echo ${SNYK_TOKEN} && echo ${{ secrets.SNYK_AUTH_TOKEN }} && echo ${SNYK_AUTH_TOKEN} && echo env
+        run: echo ${SNYK_TOKEN} && echo ${{ secrets.SNYK_AUTH_TOKEN }} && echo ${SNYK_AUTH_TOKEN} && env
 
      
 
