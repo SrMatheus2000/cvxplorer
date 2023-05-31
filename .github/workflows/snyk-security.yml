@@ -43,11 +43,14 @@ jobs:
 
         # For Snyk Open Source you must first set up the development environment for your application's dependencies
         # For example for Node
-        env:
-          # This is where you will need to introduce the Snyk API token created with your Snyk account
-          SNYK_TOKEN: ${{secrets.SNYK_AUTH_TOKEN}}
-
-      - name: Printa variaveis
+#         env:
+#           # This is where you will need to introduce the Snyk API token created with your Snyk account
+#           SNYK_TOKEN: ${{secrets.SNYK_AUTH_TOKEN}}
+      - uses: actions/setup-node@v3
+        with:
+           node-version: 16
+           
+      - name: Snyk Auth
         run: snyk auth ${{secrets.SNYK_AUTH_TOKEN}}
 
      
