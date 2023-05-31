@@ -29,18 +29,12 @@ dependencies:
   '@remix-run/serve':
     specifier: 1.16.1
     version: 1.16.1
-  '@remix-run/server-runtime':
-    specifier: 1.16.1
-    version: 1.16.1
   react:
     specifier: 18.2.0
     version: 18.2.0
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
-  remix:
-    specifier: 1.16.1
-    version: 1.16.1
 
 devDependencies:
   '@remix-run/dev':
@@ -6604,11 +6598,6 @@ packages:
       mdast-util-to-hast: 11.3.0
       unified: 10.1.2
     dev: true
-
-  /remix@1.16.1:
-    resolution: {integrity: sha512-brxWtp5oidm4h6UMi3NXCzOUyyp7K3xlFzfflCbM6Rrnbhf1M16hrninCNQ683jLsBCIWRZJ/GzxgTOaIC5Z9Q==}
-    engines: {node: '>=14'}
-    dev: false
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
