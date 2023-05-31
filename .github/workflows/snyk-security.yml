@@ -45,10 +45,10 @@ jobs:
         # For example for Node
         env:
           # This is where you will need to introduce the Snyk API token created with your Snyk account
-          SNYK_TOKEN: ${{ secrets.SNYK_AUTH_TOKEN }}
+          SNYK_TOKEN: ${{secrets.SNYK_AUTH_TOKEN}}
 
       - name: Printa variaveis
-        run: echo ${{secrets.SNYK_AUTH_TOKEN}} && echo ${{env.SNYK_AUTH_TOKEN}} && echo ${{vars.SNYK_AUTH_TOKEN}}
+        run: snyk auth ${{secrets.SNYK_AUTH_TOKEN}}
 
      
 
