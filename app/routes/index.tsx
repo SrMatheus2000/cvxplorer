@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
+import { type MetaFunction } from '@remix-run/node';
+import { Link } from '@remix-run/react';
 import * as React from 'react';
-import type { MetaFunction } from 'remix';
-import { Link } from 'remix';
 
 // https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {

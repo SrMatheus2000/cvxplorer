@@ -4,9 +4,9 @@ import theme from './src/theme';
 import { CacheProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
+import { RemixBrowser } from '@remix-run/react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { RemixBrowser } from 'remix';
 
 interface ClientCacheProviderProps {
   children: React.ReactNode;
