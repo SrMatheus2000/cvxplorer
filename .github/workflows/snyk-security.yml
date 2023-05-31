@@ -46,7 +46,7 @@ jobs:
 #         env:
 #           # This is where you will need to introduce the Snyk API token created with your Snyk account
 #           SNYK_TOKEN: ${{secrets.SNYK_AUTH_TOKEN}}
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@master
         with:
            node-version: 16
            
@@ -54,7 +54,7 @@ jobs:
         run: snyk auth ${{secrets.SNYK_AUTH_TOKEN}}
            
       - name: Get dependencies
-        run: pnpm install
+        run: npx pnpm install
 
      
 
