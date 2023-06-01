@@ -6,7 +6,7 @@ import * as React from 'react';
 // https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {
   return {
-    title: 'Remix Starter',
+    title: 'cvXplorer',
     description: 'Welcome to remix!',
   };
 };
