@@ -1,13 +1,12 @@
-import Typography from '@mui/material/Typography';
+import { InputAdornment, TextField } from '@mui/material';
 import { type MetaFunction } from '@remix-run/node';
-import { Link } from '@remix-run/react';
 import * as React from 'react';
 
 // https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {
   return {
     title: 'cvXplorer',
-    description: 'Welcome to remix!',
+    description: 'App para explorar CVEs e calcular CVSS!',
   };
 };
 
@@ -15,12 +14,16 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <React.Fragment>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Material UI Remix in TypeScript example
-      </Typography>
-      <Link to="/about" color="secondary">
-        Go to the about page
-      </Link>
+      <TextField
+        variant="outlined"
+        label="Código da CVE"
+        fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">CVE-</InputAdornment>
+          ),
+        }}
+      />
     </React.Fragment>
   );
 }
