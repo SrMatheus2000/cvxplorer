@@ -1,46 +1,9 @@
+import MetricField from './MetricField';
 import SeverityIndicator from './SeverityIndicator';
-import { Grid, MenuItem, TextField, Typography, Box } from '@mui/material';
+import { metricValues } from './util';
+import { Grid, Typography, Box } from '@mui/material';
 import { getEnvironmentalScore, getTemporalScore, getBaseScore } from 'cvss';
 import React, { useState, useEffect } from 'react';
-
-const metricLabels = {
-  AV: 'Vetor de Ataque',
-  AC: 'Complexidade do Ataque',
-  PR: 'Privilégios Necessários',
-  UI: 'Interação do Usuário',
-  S: 'Escopo',
-  C: 'Impacto de Confidencialidade',
-  I: 'Impacto de Integridade',
-  A: 'Impacto de Disponibilidade',
-  CR: 'Requisitos de Confidencialidade',
-  IR: 'Requisitos de Integridade',
-  AR: 'Requisitos de Disponibilidade',
-  E: 'Explotabilidade',
-  RL: 'Nível de Remediação',
-  RC: 'Confirmação de Relatório',
-} as const;
-
-const metricValues: { [key: string]: { [value: string]: string } } = {
-  AV: { N: 'Rede', A: 'Adjacente', L: 'Local', P: 'Físico' },
-  AC: { L: 'Baixo', H: 'Alto' },
-  PR: { N: 'Nenhum', L: 'Baixo', H: 'Alto' },
-  UI: { N: 'Nenhum', R: 'Requerido' },
-  S: { U: 'Inalterado', C: 'Alterado' },
-  C: { H: 'Alto', L: 'Baixo', N: 'Nenhum' },
-  I: { H: 'Alto', L: 'Baixo', N: 'Nenhum' },
-  A: { H: 'Alto', L: 'Baixo', N: 'Nenhum' },
-  CR: { H: 'Alto', L: 'Baixo', M: 'Médio', ND: 'Não Definido' },
-  IR: { H: 'Alto', L: 'Baixo', M: 'Médio', ND: 'Não Definido' },
-  AR: { H: 'Alto', L: 'Baixo', M: 'Médio', ND: 'Não Definido' },
-  E: {
-    X: 'Não Definido',
-    U: 'Não Conhecido',
-    P: 'Prova de Conceito',
-    F: 'Funcional',
-  },
-  RL: { X: 'Não Definido', O: 'Oficial', T: 'Temporário', W: 'Não Disponível' },
-  RC: { X: 'Não Definido', U: 'Desconhecido', R: 'Razoável', C: 'Confirmado' },
-} as const;
 
 const CvssCalculator: React.FC = () => {
   const [metrics, setMetrics] = useState<{ [key: string]: string }>({});
@@ -84,23 +47,13 @@ const CvssCalculator: React.FC = () => {
         .slice(0, 8)
         .map((metric) => (
           <Grid item xs={12} sm={6} md={4} key={metric}>
-            <TextField
-              select
-              fullWidth
-              label={metricLabels[metric as keyof typeof metricLabels]}
+            <MetricField
+              metric={metric}
               value={metrics[metric] || ''}
               onChange={(e) =>
                 handleMetricChange(metric, e.target.value as string)
               }
-            >
-              {Object.keys(
-                metricValues[metric as keyof typeof metricLabels]
-              ).map((value) => (
-                <MenuItem value={value} key={value}>
-                  {metricValues[metric][value]}
-                </MenuItem>
-              ))}
-            </TextField>
+            />
           </Grid>
         ))}
 
@@ -125,23 +78,13 @@ const CvssCalculator: React.FC = () => {
         .slice(11)
         .map((metric) => (
           <Grid item xs={12} sm={6} md={4} key={metric}>
-            <TextField
-              select
-              fullWidth
-              label={metricLabels[metric as keyof typeof metricLabels]}
+            <MetricField
+              metric={metric}
               value={metrics[metric] || ''}
               onChange={(e) =>
                 handleMetricChange(metric, e.target.value as string)
               }
-            >
-              {Object.keys(
-                metricValues[metric as keyof typeof metricLabels]
-              ).map((value) => (
-                <MenuItem value={value} key={value}>
-                  {metricValues[metric][value]}
-                </MenuItem>
-              ))}
-            </TextField>
+            />
           </Grid>
         ))}
 
@@ -166,23 +109,13 @@ const CvssCalculator: React.FC = () => {
         .slice(8, 11)
         .map((metric) => (
           <Grid item xs={12} sm={6} md={4} key={metric}>
-            <TextField
-              select
-              fullWidth
-              label={metricLabels[metric as keyof typeof metricLabels]}
+            <MetricField
+              metric={metric}
               value={metrics[metric] || ''}
               onChange={(e) =>
                 handleMetricChange(metric, e.target.value as string)
               }
-            >
-              {Object.keys(
-                metricValues[metric as keyof typeof metricLabels]
-              ).map((value) => (
-                <MenuItem value={value} key={value}>
-                  {metricValues[metric][value]}
-                </MenuItem>
-              ))}
-            </TextField>
+            />
           </Grid>
         ))}
 

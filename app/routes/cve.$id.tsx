@@ -1,7 +1,7 @@
 import CvssCalculator from '~/src/CvssCalculator';
 import SeverityIndicator from '~/src/SeverityIndicator';
 import { type CVE } from '~/src/types';
-import { parseCVE } from '~/src/util';
+import { dateFormatter, parseCVE } from '~/src/util';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {
   Typography,
@@ -69,10 +69,11 @@ export default function CVE() {
                   Formato: {cveData.data_format}
                 </Typography>
                 <Typography variant="subtitle2" color="text.secondary">
-                  Criado em: {cve.created_at}
+                  Criado em: {dateFormatter.format(new Date(cve.created_at))}
                 </Typography>
                 <Typography variant="subtitle2" color="text.secondary">
-                  Atualizado em: {cve.updated_at}
+                  Atualizado em:{' '}
+                  {dateFormatter.format(new Date(cve.updated_at))}
                 </Typography>
               </Box>
               <Typography
