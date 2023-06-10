@@ -62,7 +62,7 @@ export default function CVE() {
                 {cve.id}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary">
-                Atribuidor: ${cveData.CVE_data_meta.ASSIGNER}
+                Atribuidor: {cveData.CVE_data_meta.ASSIGNER}
               </Typography>
               <Box
                 sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}
