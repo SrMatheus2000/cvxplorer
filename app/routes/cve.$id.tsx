@@ -150,16 +150,14 @@ export default function CVE() {
                   Vendors
                 </Typography>
                 <List>
-                  {Object.entries(cve.vendors).map(
-                    ([vendor, products], index) => (
-                      <ListItem key={index}>
-                        <ListItemText
-                          primary={vendor}
-                          secondary={`Products: ${products.join(', ')}`}
-                        />
-                      </ListItem>
-                    )
-                  )}
+                  {Object.entries(cve.vendors).map(([vendor, products]) => (
+                    <ListItem key={vendor}>
+                      <ListItemText
+                        primary={vendor}
+                        secondary={`Products: ${products.join(', ')}`}
+                      />
+                    </ListItem>
+                  ))}
                 </List>
               </CardContent>
             </Card>
@@ -174,8 +172,8 @@ export default function CVE() {
                   CWEs
                 </Typography>
                 <List>
-                  {cve.cwes.map((cwe, index) => (
-                    <ListItem key={index}>
+                  {cve.cwes.map((cwe) => (
+                    <ListItem key={cwe}>
                       <ListItemText primary={cwe} />
                     </ListItem>
                   ))}
@@ -192,8 +190,8 @@ export default function CVE() {
                 Referências
               </Typography>
               <List>
-                {cveData.references.reference_data.map((ref, index) => (
-                  <ListItem key={index}>
+                {cveData.references.reference_data.map((ref) => (
+                  <ListItem key={ref.url}>
                     <ListItemText
                       primary={
                         <MuiLink href={ref.url} target="_blank">
