@@ -1,5 +1,5 @@
 import { type CVEListItem } from '~/src/types';
-import { parseCVE } from '~/src/util';
+import { dateFormatter, parseCVE } from '~/src/util';
 import {
   CircularProgress,
   InputAdornment,
@@ -14,16 +14,6 @@ import { json, type MetaFunction, ActionArgs } from '@remix-run/node';
 import { useFetcher, useNavigate } from '@remix-run/react';
 import axios from 'axios';
 import { Fragment, useEffect, useState } from 'react';
-
-const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-  hour12: false,
-});
 
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
