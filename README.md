@@ -30,12 +30,15 @@ cvXplorer was developed with a security-first mindset. The following tools and p
 ## Getting Started
 
 1. Clone this repository:
+
 ``git clone git@github.com:SrMatheus2000/cvxplorer.git``
 
 2. Navigate to the project directory and install dependencies with pnpm:
+
 ``pnpm install``
 
 3. Run the application:
+
 ``pnpm dev``
 
 ## Contributing
@@ -45,4 +48,3 @@ Contributions are welcome! Feel free to submit issues or pull requests.
 ## License
 
 This project is licensed under the MIT License.
-
