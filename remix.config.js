@@ -1,3 +1,5 @@
+const { getDependenciesToBundle } = require('@remix-run/dev');
+
 /**
  * @type {import('@remix-run/dev/config').AppConfig}
  */
