@@ -2,7 +2,11 @@ import ClientStyleContext from './src/ClientStyleContext';
 import Layout from './src/Layout';
 import theme from './src/theme';
 import { withEmotionCache } from '@emotion/react';
-import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
+import {
+  Divider,
+  Typography,
+  unstable_useEnhancedEffect as useEnhancedEffect,
+} from '@mui/material';
 import {
   Links,
   LiveReload,
@@ -86,15 +90,13 @@ export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <Document title="Error!">
       <Layout>
-        <div>
-          <h1>There was an error</h1>
-          <p>{error.message}</p>
-          <hr />
-          <p>
-            Hey, developer, you should replace this with what you want your
-            users to see.
-          </p>
-        </div>
+        <Typography variant="h4" gutterBottom>
+          There was an error
+        </Typography>
+        <Typography variant="body1" gutterBottom component="div">
+          {error.message}
+        </Typography>
+        <Divider />
       </Layout>
     </Document>
   );
@@ -108,15 +110,17 @@ export function CatchBoundary() {
   switch (caught.status) {
     case 401:
       message = (
-        <p>
+        <Typography variant="body1" gutterBottom>
           Oops! Looks like you tried to visit a page that you do not have access
           to.
-        </p>
+        </Typography>
       );
       break;
     case 404:
       message = (
-        <p>Oops! Looks like you tried to visit a page that does not exist.</p>
+        <Typography variant="body1" gutterBottom>
+          Oops! Looks like you tried to visit a page that does not exist.
+        </Typography>
       );
       break;
 
@@ -127,9 +131,9 @@ export function CatchBoundary() {
   return (
     <Document title={`${caught.status} ${caught.statusText}`}>
       <Layout>
-        <h1>
+        <Typography variant="h4" gutterBottom>
           {caught.status}: {caught.statusText}
-        </h1>
+        </Typography>
         {message}
       </Layout>
     </Document>
