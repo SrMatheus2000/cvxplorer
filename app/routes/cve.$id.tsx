@@ -33,7 +33,7 @@ export const loader: LoaderFunction = async ({ params }) => {
           ),
       },
     });
-
+    if (res.status !== 200) return redirect('/');
     const data = (await res.json()) as CVE;
 
     return json(data);
