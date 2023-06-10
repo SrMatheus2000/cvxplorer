@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "1.16.1",
+    "@types/axios": "^0.14.0",
     "@types/cvss": "^1.0.0",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
