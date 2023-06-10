@@ -1,6 +1,53 @@
-import { TextField } from '@mui/material';
-import { type MetaFunction } from '@remix-run/node';
+import { type CVEListItem } from '~/src/types';
+import {
+  CircularProgress,
+  InputAdornment,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TextField,
+} from '@mui/material';
+import { json, type MetaFunction, ActionArgs } from '@remix-run/node';
+import { useFetcher, useNavigate } from '@remix-run/react';
+import axios from 'axios';
 import { Fragment, useEffect, useState } from 'react';
+
+const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+});
+
+const parseCVE = (cve: string): string => {
+  const stripped = cve.replace(/[^\d]/g, '');
+
+  if (stripped.length > 4) {
+    return `CVE-${stripped.slice(0, 4)}-${stripped.slice(4, 11)}`;
+  }
+  return `CVE-${stripped}`;
+};
+
+export async function action({ request }: ActionArgs) {
+  const body = await request.formData();
+  const cve = body.get('cve');
+  const res = await axios.get<CVEListItem[]>(
+    `https://www.opencve.io/api/cve?search=${parseCVE(cve as string)}`,
+    {
+      auth: {
+        username: process.env.API_USER ?? '',
+        password: process.env.API_PASSWORD ?? '',
+      },
+    }
+  );
+
+  return json(res.data);
+}
 
 // https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {
@@ -12,37 +59,73 @@ export const meta: MetaFunction = () => {
 
 // https://remix.run/guides/routing#index-routes
 export default function Index() {
-  const [cve, setCve] = useState('');
+  const navigate = useNavigate();
+
+  const { data = [], submit, state, Form } = useFetcher<CVEListItem[]>();
+
+  const [cve, setCve] = useState('CVE-');
 
   useEffect(() => {
-    const cveRegex = /^\d{4}-\d{4,7}$/;
-    if (cveRegex.test(cve)) {
-      // TODO Temp
-      //console.log('cve válida');
-    }
-  }, [cve]);
+    const timer = setTimeout(() => {
+      submit({ cve }, { method: 'POST' });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [cve, submit]);
 
-  const parseCVE = (cve: string): string => {
-    const stripped = cve.replace(/[^\d]/g, '');
-
-    if (stripped.length > 4) {
-      return `${stripped.slice(0, 4)}-${stripped.slice(4, 11)}`;
-    }
-    return stripped;
-  };
+  function handleClick(id: string): void {
+    navigate(`/cve/${id}`);
+  }
 
   return (
     <Fragment>
-      <TextField
-        variant="outlined"
-        label="Código da CVE"
-        fullWidth
-        value={cve}
-        onChange={(e) => setCve(parseCVE(e.target.value))}
-        InputProps={{
-          startAdornment: 'CVE-',
-        }}
-      />
+      <Form>
+        <TextField
+          name="cve"
+          variant="outlined"
+          label="Código da CVE"
+          fullWidth
+          value={cve}
+          onChange={(e) => setCve(parseCVE(e.target.value))}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                {state === 'submitting' && <CircularProgress />}
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Form>
+      <Table sx={{ minWidth: 650 }} aria-label="table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Resumo</TableCell>
+            <TableCell>Criação</TableCell>
+            <TableCell>Edição</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow
+              key={row.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              hover
+              onClick={() => handleClick(row.id)}
+            >
+              <TableCell component="th" scope="row" sx={{ minWidth: 150 }}>
+                {row.id}
+              </TableCell>
+              <TableCell>{row.summary}</TableCell>
+              <TableCell>
+                {dateFormatter.format(new Date(row.created_at))}
+              </TableCell>
+              <TableCell>
+                {dateFormatter.format(new Date(row.updated_at))}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </Fragment>
   );
 }
