@@ -12,23 +12,28 @@ import {
 } from '@mui/material';
 import { json, type MetaFunction, ActionArgs } from '@remix-run/node';
 import { useFetcher, useNavigate } from '@remix-run/react';
-import axios from 'axios';
 import { Fragment, useEffect, useState } from 'react';
 
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
   const cve = body.get('cve');
-  const res = await axios.get<CVEListItem[]>(
+  const res = await fetch(
     `https://www.opencve.io/api/cve?search=${parseCVE(cve as string)}`,
     {
-      auth: {
-        username: process.env.API_USER ?? '',
-        password: process.env.API_PASSWORD ?? '',
+      method: 'GET',
+      headers: {
+        Authorization:
+          'Basic ' +
+          btoa(
+            `${process.env.API_USER ?? ''}:${process.env.API_PASSWORD ?? ''}`
+          ),
       },
     }
   );
 
-  return json(res.data);
+  const data = (await res.json()) as CVEListItem[];
+
+  return json(data);
 }
 
 // https://remix.run/api/conventions#meta
