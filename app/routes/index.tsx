@@ -1,4 +1,5 @@
 import { type CVEListItem } from '~/src/types';
+import { parseCVE } from '~/src/util';
 import {
   CircularProgress,
   InputAdornment,
@@ -23,15 +24,6 @@ const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
   second: '2-digit',
   hour12: false,
 });
-
-const parseCVE = (cve: string): string => {
-  const stripped = cve.replace(/[^\d]/g, '');
-
-  if (stripped.length > 4) {
-    return `CVE-${stripped.slice(0, 4)}-${stripped.slice(4, 11)}`;
-  }
-  return `CVE-${stripped}`;
-};
 
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
