@@ -1,40 +1,48 @@
-# Material UI - Remix example in TypeScript
+# cvXplorer 🛡️
 
-## How to use
+![GitHub license](https://img.shields.io/github/license/SrMatheus2000/cvxplorer)
+![GitHub issues](https://img.shields.io/github/issues/SrMatheus2000/cvxplorer)
+![GitHub forks](https://img.shields.io/github/forks/SrMatheus2000/cvxplorer)
 
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+## Overview
 
-<!-- #default-branch-switch -->
+cvXplorer is a web application aimed at cybersecurity professionals and enthusiasts. The application provides an interface for searching and analyzing security vulnerabilities defined in the Common Vulnerabilities and Exposures (CVE) system. Users can input a CVE identifier, and the application fetches the relevant data from the OpenCVE API. It presents the results in an organized manner, and allows users to view detailed information, including the Common Vulnerability Scoring System (CVSS) metrics.
 
-```sh
-curl https://codeload.github.com/mui/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/material-remix-ts
-cd material-remix-ts
-```
+## Features
 
-Install it and run:
+- **CVE Search:** Users can search for CVEs by typing the identifier in the search bar.
+- **CVE Details:** Detailed view of the CVE, including description and CVSS metrics.
+- **CVSS Calculator:** When CVSS scores are not available, users can manually calculate them by inputting relevant metrics.
+- **Secure Communication:** Application is hosted with HTTPS, ensuring encrypted communication.
 
-```sh
-npm install
-npm run dev
-```
+## Security Practices and Tools
 
-or:
+cvXplorer was developed with a security-first mindset. The following tools and practices were used to protect the application against Common Weakness Enumerations (CWEs):
 
-<!-- #default-branch-switch -->
+- **ESLint:** Linting tool for identifying and fixing code issues.
+- **Input Validation and Formatting:** Protects against CWEs such as Cross-site Scripting (XSS) and Improper Input Validation.
+- **SonarCloud:** Static code analysis tool for identifying vulnerabilities and code issues.
+- **Snyk:** Identifies and fixes vulnerabilities in project dependencies.
+- **Semgrep:** Static code analysis tool similar to SonarCloud.
+- **Dependabot:** Keeps dependencies updated and secure.
+- **CodeQL:** Code analysis tool for identifying complex vulnerabilities such as SQL Injection and Buffer Overflow.
 
-[![Edit on StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/mui/material-ui/tree/master/examples/material-remix-ts)
+## Getting Started
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui/material-ui/tree/master/examples/material-remix-ts)
+1. Clone this repository:
+``git clone git@github.com:SrMatheus2000/cvxplorer.git``
 
-## The idea behind the example
+2. Navigate to the project directory and install dependencies with pnpm:
+``pnpm install``
 
-The project uses [Remix](https://remix.run/), which is a full stack web framework.
-It includes `@mui/material` and its peer dependencies, including [Emotion](https://emotion.sh/docs/introduction), the default style engine in Material UI v5.
-If you prefer, you can [use styled-components instead](https://mui.com/material-ui/guides/interoperability/#styled-components).
+3. Run the application:
+``pnpm dev``
 
-## What's next?
+## Contributing
 
-<!-- #default-branch-switch -->
+Contributions are welcome! Feel free to submit issues or pull requests.
 
-You now have a working example project.
-You can head back to the documentation, continuing browsing it from the [templates](https://mui.com/material-ui/getting-started/templates/) section.
+## License
+
+This project is licensed under the MIT License.
+
