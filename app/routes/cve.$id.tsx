@@ -17,24 +17,26 @@ import {
 } from '@mui/material';
 import { LoaderFunction, json, redirect } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
-import axios from 'axios';
 import React from 'react';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const cve = params.id;
   if (!cve) return redirect('/');
   try {
-    const res = await axios.get<CVE>(
-      `https://www.opencve.io/api/cve/${parseCVE(cve)}`,
-      {
-        auth: {
-          username: process.env.API_USER ?? '',
-          password: process.env.API_PASSWORD ?? '',
-        },
-      }
-    );
+    const res = await fetch(`https://www.opencve.io/api/cve/${parseCVE(cve)}`, {
+      method: 'GET',
+      headers: {
+        Authorization:
+          'Basic ' +
+          btoa(
+            `${process.env.API_USER ?? ''}:${process.env.API_PASSWORD ?? ''}`
+          ),
+      },
+    });
 
-    return json(res.data);
+    const data = (await res.json()) as CVE;
+
+    return json(data);
   } catch (error) {
     console.error(error);
     return redirect('/');
