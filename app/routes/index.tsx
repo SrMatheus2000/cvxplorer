@@ -10,7 +10,7 @@ import {
   TableRow,
   TextField,
 } from '@mui/material';
-import { json, type MetaFunction, ActionArgs } from '@remix-run/node';
+import { json, type MetaFunction, ActionArgs, redirect } from '@remix-run/node';
 import { useFetcher, useNavigate } from '@remix-run/react';
 import { Fragment, useEffect, useState } from 'react';
 
@@ -30,6 +30,7 @@ export async function action({ request }: ActionArgs) {
       },
     }
   );
+  if (res.status !== 200) return redirect('/');
 
   const data = (await res.json()) as CVEListItem[];
 
@@ -48,7 +49,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const navigate = useNavigate();
 
-  const { data = [], submit, state, Form } = useFetcher<CVEListItem[]>();
+  const { data = [], submit, state } = useFetcher<CVEListItem[]>();
 
   const [cve, setCve] = useState('CVE-');
 
@@ -65,23 +66,21 @@ export default function Index() {
 
   return (
     <Fragment>
-      <Form>
-        <TextField
-          name="cve"
-          variant="outlined"
-          label="Código da CVE"
-          fullWidth
-          value={cve}
-          onChange={(e) => setCve(parseCVE(e.target.value))}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {state === 'submitting' && <CircularProgress />}
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Form>
+      <TextField
+        name="cve"
+        variant="outlined"
+        label="Código da CVE"
+        fullWidth
+        value={cve}
+        onChange={(e) => setCve(parseCVE(e.target.value))}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              {state === 'submitting' && <CircularProgress />}
+            </InputAdornment>
+          ),
+        }}
+      />
       <Table sx={{ minWidth: 650 }} aria-label="table">
         <TableHead>
           <TableRow>
