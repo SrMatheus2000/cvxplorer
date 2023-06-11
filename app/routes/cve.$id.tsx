@@ -15,7 +15,7 @@ import {
   Box,
   Link as MuiLink,
 } from '@mui/material';
-import { LoaderFunction, json, redirect } from '@remix-run/node';
+import { LoaderFunction, MetaFunction, json, redirect } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import React from 'react';
 
@@ -41,6 +41,13 @@ export const loader: LoaderFunction = async ({ params }) => {
     console.error(error);
     return redirect('/');
   }
+};
+
+export const meta: MetaFunction = ({ params }) => {
+  return {
+    title: params.id,
+    description: 'App para explorar CVEs e calcular CVSS!',
+  };
 };
 
 export default function CVE() {
