@@ -19,7 +19,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "5.14.0",
     "@remix-run/node": "1.18.1",
-    "@remix-run/serve": "1.18.1",
+    "@remix-run/serve": "1.19.0",
     "@remix-run/react": "1.18.1",
     "cvss": "^1.0.5",
     "eslint-import-resolver-typescript": "^3.5.5",
