@@ -20,7 +20,7 @@
     "@mui/material": "5.14.1",
     "@remix-run/node": "1.19.0",
     "@remix-run/react": "1.19.0",
-    "@remix-run/serve": "1.19.0",
+    "@remix-run/serve": "1.19.3",
     "cvss": "^1.0.5",
     "eslint-import-resolver-typescript": "^3.5.5",
     "react": "18.2.0",
